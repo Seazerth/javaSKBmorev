@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: spring-profile-demo
+
+example:
+  test: ${EXAMPLE_TEST:default}  # Читаем переменную окружения, по умолчанию "default"

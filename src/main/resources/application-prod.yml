@@ -1,0 +1,8 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+app:
+  values: [ "prod_value1", "prod_value2", "prod_value3" ]
+  name: "Spring Prod App"

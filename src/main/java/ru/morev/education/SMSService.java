@@ -2,23 +2,25 @@ package ru.morev.education;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
-@Service("SMSService")
+@Service
+@Log4j2
 public class SMSService implements MessageService {
 
     @PostConstruct
     public void init() {
-        System.out.println("SMSService создан!");
+        log.info("SMSService создан!");
     }
 
     @PreDestroy
     public void destroy() {
-        System.out.println("SMSService уничтожен!");
+        log.info("SMSService уничтожен!");
     }
 
     @Override
     public void sendMessage(String message) {
-        System.out.println("📩 Отправка SMS: " + message);
+        log.info("📩 Отправка SMS: {}", message);
     }
 }

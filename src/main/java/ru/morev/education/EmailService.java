@@ -2,23 +2,27 @@ package ru.morev.education;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-@Service("emailService")
+@Service
+@Primary // Делает этот бин приоритетным
+@Log4j2
 public class EmailService implements MessageService {
 
     @PostConstruct
     public void init() {
-        System.out.println("EmailService создан!");
+        log.info("EmailService создан!");
     }
 
     @PreDestroy
     public void destroy() {
-        System.out.println("EmailService уничтожен!");
+        log.info("EmailService уничтожен!");
     }
 
     @Override
     public void sendMessage(String message) {
-        System.out.println("📧 Отправка Email: " + message);
+        log.info("📧 Отправка Email: {}", message);
     }
 }

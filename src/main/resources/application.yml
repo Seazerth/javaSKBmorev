@@ -1,0 +1,8 @@
+rate-limit:
+  max-requests: 5
+
+spring:
+  security:
+    user:
+      name: user
+      password: password

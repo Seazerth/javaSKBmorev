@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Request Headers</title>
+</head>
+<body>
+<h2>Request Headers</h2>
+<table border="1">
+    <tr>
+        <th>Header</th>
+        <th>Value</th>
+    </tr>
+    <tr th:each="entry : ${headers}">
+        <td th:text="${entry.key}"></td>
+        <td th:text="${entry.value}"></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,32 +1,26 @@
 package ru.morev.education.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import ru.morev.education.service.HeaderService;
 
-import jakarta.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Map;
 
 @Controller
 public class HeaderController {
 
+    private final HeaderService headerService;
+
+    public HeaderController(HeaderService headerService) {
+        this.headerService = headerService;
+    }
+
     @GetMapping("/headers")
     public String getHeaders(Model model, HttpServletRequest request) {
-        try {
-            Map<String, String> headers = new HashMap<>();
-            Enumeration<String> headerNames = request.getHeaderNames();
-
-            while (headerNames.hasMoreElements()) {
-                String name = headerNames.nextElement();
-                headers.put(name, request.getHeader(name));
-            }
-
-            model.addAttribute("headers", headers);
-            return "headers";  // Убедитесь, что файл headers.html существует в templates
-        } catch (Exception e) {
-            throw new RuntimeException("Ошибка при обработке заголовков", e);
-        }
+        Map<String, String> headers = headerService.extractHeaders(request);
+        model.addAttribute("headers", headers);
+        return "headers";
     }
 }

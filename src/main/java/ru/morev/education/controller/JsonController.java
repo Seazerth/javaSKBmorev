@@ -1,8 +1,9 @@
 package ru.morev.education.controller;
 
-import ru.morev.education.model.RequestData;
-import ru.morev.education.service.RequestService;
 import org.springframework.web.bind.annotation.*;
+import ru.morev.education.model.RequestData;
+import ru.morev.education.model.ResponseData;
+import ru.morev.education.service.RequestService;
 
 @RestController
 @RequestMapping("/api")
@@ -15,7 +16,7 @@ public class JsonController {
     }
 
     @PostMapping("/process")
-    public RequestData processJson(@RequestBody RequestData requestData) {
+    public ResponseData processJson(@RequestBody RequestData requestData) {
         return requestService.processRequest(requestData);
     }
 }

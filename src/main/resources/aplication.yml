@@ -3,10 +3,6 @@ server:
 
 spring:
   thymeleaf:
-    prefix: classpath:/templates/  # Указывает, что шаблоны находятся в src/main/resources/templates
-    suffix: .html                 # Указывает расширение файлов шаблонов
-    cache: false                  # Отключает кэширование шаблонов для разработки (в production установите true)
-  mvc:
-    view:
-      prefix: /templates/         # Дублирует настройку для Thymeleaf (можно удалить, если используется только Thymeleaf)
-      suffix: .html              # Дублирует настройку для Thymeleaf (можно удалить, если используется только Thymeleaf)
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false

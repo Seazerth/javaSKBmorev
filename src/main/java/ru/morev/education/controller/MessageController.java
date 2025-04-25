@@ -17,6 +17,6 @@ public class MessageController {
     @PostMapping
     public String send(@RequestBody Message message) {
         rabbitTemplate.convertAndSend("edu.queue", message);
-        return "✅ Сообщение отправлено!";
+        return "Сообщение отправлено!";
     }
 }

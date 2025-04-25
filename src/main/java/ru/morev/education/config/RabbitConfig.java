@@ -17,7 +17,7 @@ public class RabbitConfig {
 
     @Bean
     public Jackson2JsonMessageConverter jsonMessageConverter() {
-        return new Jackson2JsonMessageConverter(); // ✨ JSON-сериализация
+        return new Jackson2JsonMessageConverter();
     }
 
     @Bean

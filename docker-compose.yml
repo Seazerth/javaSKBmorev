@@ -1,0 +1,56 @@
+version: "3.9"
+services:
+
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    networks:
+      - homework-network
+
+  sender:
+    image: openjdk:21-slim
+    command: ["java", "-jar", "/app/sender.jar"]
+    volumes:
+      - "C:/Users/Morev/Downloads/education/target/education-0.0.1-SNAPSHOT.jar:/app/sender.jar"
+    ports:
+      - "8080:8080"
+    networks:
+      - homework-network
+    depends_on:
+      - rabbitmq
+
+  receiver:
+    image: openjdk:21-slim
+    command: ["java", "-jar", "/app/receiver.jar"]
+    volumes:
+      - "C:/Users/Morev/Downloads/1234/target/1234-0.0.1-SNAPSHOT.jar:/app/receiver.jar"
+    ports:
+      - "8081:8081"
+    networks:
+      - homework-network
+    depends_on:
+      - rabbitmq
+
+  homework-handler:
+    image: sw24sx/spring_boot_course:0.3
+    environment:
+      - SPRING_PROFILES_ACTIVE=homework
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USERNAME=guest
+      - RABBITMQ_PASSWORD=guest
+    ports:
+      - "8082:8080"
+    networks:
+      - homework-network
+    depends_on:
+      - rabbitmq
+
+networks:
+  homework-network:
+    driver: bridge
